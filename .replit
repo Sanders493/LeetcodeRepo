@@ -1,4 +1,4 @@
-entrypoint = "unit6Session1.py"
+entrypoint = "leetCode.py"
 modules = ["python-3.10"]
 
 [nix]
