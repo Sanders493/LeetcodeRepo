@@ -74,7 +74,7 @@ def find_middle_element(head) -> object:
   fast = head
   slow = head
 
-  while fast.next and fast.next.next :
+  while fast.next and fast.next.next:
     slow = slow.next
     fast = fast.next.next
 
@@ -83,3 +83,53 @@ def find_middle_element(head) -> object:
 
 # node1 = Node(1, Node(2, Node(3)))
 # print(find_middle_element(node1))
+
+# Problem 5: Is Palindrome?
+
+
+def is_palindrome(head: Node | None) -> bool:
+  if not head:
+    return False
+
+  elements: list[object] = []
+  current: Node | None = head
+
+  while current:
+    elements.append(current.value)
+    current = current.next
+
+  return elements == elements[::-1]
+
+
+# node1 = Node(1, Node(2, Node(1)))
+# print(is_palindrome(node1))
+
+# Problem 6: Put it in Reverse
+
+
+def reverse(head: Node | None) -> Node | None:
+  if not head:
+    return None
+
+  elements = []
+  current = head
+
+  while current:
+    elements.append(current.value)
+    current = current.next
+
+  elements.reverse()
+  new_head = Node(elements.pop(0))
+  current = new_head
+
+  for elem in elements:
+    current.next = Node(elem)
+    current = current.next
+
+  return new_head
+
+
+# node1 = Node(1, Node(2, Node(3, Node(4))))
+# print_list(node1)
+# new_node1 = reverse(node1)
+# print_list(new_node1)
