@@ -128,6 +128,16 @@ def reverse(head: Node | None) -> Node | None:
 
   return new_head
 
+def is_circular(head):
+  if not head.next:
+    return False
+    
+  current = head.next
+
+  while current.next:
+    if current == head:
+      return True
+  return False
 
 # node1 = Node(1, Node(2, Node(3, Node(4))))
 # print_list(node1)
