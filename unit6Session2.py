@@ -127,7 +127,43 @@ def binary_to_int(head):
 
   return int(total)
 
-node1 = Node(1, Node(0, Node(1, Node(1, Node(1, Node(0, Node(1)))))))
-node2 = Node(1, Node(0, Node(1)))
-print(binary_to_int(node2))
-print(binary_to_int(node1)) 
+# node1 = Node(1, Node(0, Node(1, Node(1, Node(1, Node(0, Node(1)))))))
+# node2 = Node(1, Node(0, Node(1)))
+# print(binary_to_int(node2))
+# print(binary_to_int(node1)) 
+
+def add_two_numbers(head_a: Node, head_b: Node) -> Node:
+  num1_str: str = ""
+  num2_str: str = ""
+
+  current = head_a
+  while current:
+    num1_str = str(current.value) + num1_str
+    current = current.next
+
+  current = head_b
+  while current:
+    num2_str = str(current.value) + num2_str
+    current = current.next
+
+  sum = int(num1_str) + int(num2_str)
+
+  num_list = str(sum).split()
+  new_head = Node(num_list.pop(0))
+  current = new_head
+  for num in num_list:
+    current.next = Node(num)
+    current = current.next
+
+  return new_head
+
+# node4 = Node(4)
+# node3 = Node(3, node4)
+# node2 = Node(2, node3)
+# node1 = Node(1, node2)
+
+# node5 = Node(1, Node(0, Node(1)))
+
+# print_ll(add_two_numbers(node1, node5))
+
+
