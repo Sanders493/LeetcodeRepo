@@ -109,6 +109,7 @@ def partition(head, val):
 
 # Problem 4: Convert Binary Number in a Linked List to Integer
 
+
 def binary_to_int(head):
   length = 0
   total = 0
@@ -118,7 +119,7 @@ def binary_to_int(head):
     length += 1
     current = current.next
 
-  divisor = 2 ** length
+  divisor = 2**length
   current = head
   while current:
     total += current.value * divisor
@@ -127,10 +128,12 @@ def binary_to_int(head):
 
   return int(total)
 
+
 # node1 = Node(1, Node(0, Node(1, Node(1, Node(1, Node(0, Node(1)))))))
 # node2 = Node(1, Node(0, Node(1)))
 # print(binary_to_int(node2))
-# print(binary_to_int(node1)) 
+# print(binary_to_int(node1))
+
 
 def add_two_numbers(head_a: Node, head_b: Node) -> Node:
   num1_str: str = ""
@@ -157,6 +160,7 @@ def add_two_numbers(head_a: Node, head_b: Node) -> Node:
 
   return new_head
 
+
 # node4 = Node(4)
 # node3 = Node(3, node4)
 # node2 = Node(2, node3)
@@ -167,3 +171,38 @@ def add_two_numbers(head_a: Node, head_b: Node) -> Node:
 # print_ll(add_two_numbers(node1, node5))
 
 
+# Problem 6: Reverse Sublist of a Linked List
+def reverse_between(head, m, n):
+  new_head = None
+  temp_current = new_head
+
+  index = 1
+  current = head
+  while current and index <= n:
+    if index >= m:
+      temp_current = Node(current.value)
+      temp_current.next = new_head
+      new_head = temp_current
+    current = current.next
+    index += 1
+
+  if current and new_head:
+    new_current = new_head
+
+    while new_current.next:
+      new_current = new_current.next
+    new_current.next = current
+  if m == 1:
+    return new_head
+
+  index = 2
+  current = head
+  while current and index < m:
+    current = current.next
+  head.next = new_head
+  return head
+
+
+# input list: 1 -> 2 -> 3 -> 4 -> 5
+# node1 = Node(1, Node(2, Node(3, Node(4, Node(5)))))
+# print_ll(reverse_between(node1, 1, 1))
