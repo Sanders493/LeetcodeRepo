@@ -106,3 +106,28 @@ def partition(head, val):
 # node1 = Node(3, Node(2, Node(1, Node(5, Node(10, Node(5, Node(8)))))))
 # 3 -> 2 -> 1 -> 5 -> 10 -> 5 -> 8
 # print_ll(partition(node1, 5))
+
+# Problem 4: Convert Binary Number in a Linked List to Integer
+
+def binary_to_int(head):
+  length = 0
+  total = 0
+
+  current = head
+  while current.next:
+    length += 1
+    current = current.next
+
+  divisor = 2 ** length
+  current = head
+  while current:
+    total += current.value * divisor
+    divisor /= 2
+    current = current.next
+
+  return int(total)
+
+node1 = Node(1, Node(0, Node(1, Node(1, Node(1, Node(0, Node(1)))))))
+node2 = Node(1, Node(0, Node(1)))
+print(binary_to_int(node2))
+print(binary_to_int(node1)) 
