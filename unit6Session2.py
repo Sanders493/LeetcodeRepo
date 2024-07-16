@@ -6,6 +6,15 @@ class Node:
 
 
 # Problem 1: Detect Circular Linked List
+def print_ll(head) -> None:
+  current = head
+  lst: list[str] = []
+
+  while current:
+    lst.append(str(current.value))
+    current = current.next
+
+  print(" -> ".join(lst))
 
 
 def is_circular(head):
@@ -41,20 +50,20 @@ def find_last_node_in_cycle(head) -> Node | None:
     slow = slow.next
     if slow == fast:
       break
-  else: 
+  else:
     return None
 
   slow = head
   while slow != fast:
-      slow = slow.next
-      fast = fast.next
-
+    slow = slow.next
+    fast = fast.next
 
   last_node = slow
   while last_node.next != slow:
-      last_node = last_node.next
+    last_node = last_node.next
 
   return last_node.value
+
 
 # node4 = Node(4)
 # node3 = Node(3, node4)
@@ -62,3 +71,38 @@ def find_last_node_in_cycle(head) -> Node | None:
 # node1 = Node(1, node2)
 # node4.next = node2
 # print(find_last_node_in_cycle(node1))
+
+# Problem 3: Partition List Around Value
+
+
+def partition(head, val):
+  if not head:
+    return None
+
+  greater_head = Node(0)
+  lesser_head = Node(0)
+
+  less = lesser_head
+  great = greater_head
+
+  current = head
+  while current:
+    if current.value < val:
+      less.next = current
+      less = less.next
+    else:
+      great.next = current
+      great = great.next
+    current = current.next
+
+  if great != greater_head:
+    less.next = greater_head.next
+
+  greater_head.next = None
+  great.next = None
+  return lesser_head.next
+
+
+# node1 = Node(3, Node(2, Node(1, Node(5, Node(10, Node(5, Node(8)))))))
+# 3 -> 2 -> 1 -> 5 -> 10 -> 5 -> 8
+# print_ll(partition(node1, 5))
