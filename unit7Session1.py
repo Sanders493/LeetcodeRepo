@@ -91,5 +91,34 @@ def find_last(lst, target):
 
   return last_occurence
 
-print(find_last([1,1,1,1,2,3,4,5,5,5,6], 8))
+# print(find_last([1,1,1,1,2,3,4,5,5,5,6], 8))
 
+# Problem 7: Find Floor
+
+def find_floor(lst: list[int], x: int) -> int:
+  left, right = 0, len(lst) - 1
+  last_smaller = -1
+
+  while left <= right:
+    mid = (left + right) // 2
+    if lst[mid] == x:
+      return mid
+    elif lst[mid] > x:
+      right = mid - 1
+    else:
+      last_smaller = mid
+      left = mid + 1
+      
+  return last_smaller
+
+# print(find_floor([2, 6, 9, 11, 11, 15, 23, 25], 11))
+
+'''
+Happy case:
+find_floor([1,2,9,13,25,26], 3) => 1
+
+Edge case:
+find_floor([],2) => -1
+find_floor([6, 7, 10, 12],4) => -1 
+find_floor([2, 6, 9, 11, 11, 15, 23, 25], 11) => 3
+'''
