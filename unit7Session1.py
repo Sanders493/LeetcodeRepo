@@ -71,10 +71,25 @@ def binary_search(lst, target) -> int:
 
   return -1
 
-print(binary_search([1,2,3,4,6], 5))
+# print(binary_search([1,2,3,4,6], 5))
 
 # Problem 6: Backwards Binary Search
 
-
+def find_last(lst, target):
+  left, right = 0, len(lst) - 1
+  last_occurence = -1
   
+  while left <= right:
+    mid = (left + right) // 2
+    if lst[mid] == target:
+        last_occurence = mid
+        left = mid + 1
+    elif target < lst[mid]:
+      right = mid - 1
+    else:
+      left = mid + 1
+
+  return last_occurence
+
+print(find_last([1,1,1,1,2,3,4,5,5,5,6], 8))
 
