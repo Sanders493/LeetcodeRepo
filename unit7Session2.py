@@ -23,23 +23,22 @@ is_nested("((())") => False
 
 def count_ones(lst: list[int]) -> int:
   count = 0
-  target = 1
 
   left, right = 0, len(lst) - 1
 
   while left <= right:
     mid = (left + right) // 2
-    if lst[mid] == target:
-      count += 1
+    if lst[mid] == 0:
       left = mid + 1
-    elif lst[mid] > target:
-      right = mid - 1
     else:
-      left = mid + 1
+      right = mid - 1
+
+  if left < len(lst) and lst[left] == 1:
+    count = len(lst) - left
 
   return count
 
-print(count_ones([1,1,1,1]))
+print(count_ones([0,0,0,0,1,1,1]))
 '''
 Happy Case:
 count_ones([0,0,0,0,1,1,1]) => 3
@@ -50,3 +49,5 @@ count_ones([]) => 0
 count_ones([0,0,2,5,13,16,21]) => 0
 count_ones([1,1,1,1]) => 4
 '''
+
+# 
