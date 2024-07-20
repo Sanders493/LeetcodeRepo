@@ -1,6 +1,4 @@
 # Problem 1: Neatly Nested
-
-
 def is_nested(paren_s: str) -> bool:
   if paren_s == "":
     return True
@@ -22,8 +20,6 @@ is_nested("((())") => False
 '''
 
 # Problem 2: How Many 1s
-
-
 def count_ones(lst: list[int]) -> int:
   count = 0
 
@@ -98,8 +94,6 @@ Detailed Plan:
 '''
 
 # Problem 4: Count Rotations
-
-
 def count_rotations(nums):
   if len(nums) < 2:
     return 0
@@ -120,7 +114,7 @@ def count_rotations(nums):
   return left
 
 
-# print(count_rotations([9,12,13,2]))
+# print(count_rotations([10, 2, 5, 6, 8, 9]))
 '''
 Happy Case:
 count_rotatioins([10,12,3,4,7]) => 2
@@ -140,8 +134,8 @@ Detailed Plan:
 -loops 
 '''
 
-# Problem 5: Merge Sort I
 
+# Problem 5: Merge Sort I
 def merge(left, right):
   result = []
   i = j = 0
@@ -164,6 +158,7 @@ def merge(left, right):
 
   return result
 
+
 def merge_sort(lst):
   if not lst:
     return []
@@ -174,7 +169,8 @@ def merge_sort(lst):
 
   return merge(merge_sort(lst[:mid + 1]), merge_sort(lst[mid + 1:]))
 
-print(merge_sort([5, 3, 4, 2, 1]))
+
+# print(merge_sort([5, 3, 4, 2, 1]))
 """
 Happy Case:
 merge_sort([2,4,1,3]) => [1,2,3,4]
@@ -184,3 +180,70 @@ merge_sort([]) => []
 merge_sort([1,1,1,1]) => [1,1,1,1]
 merge_sort([1,2,3,4]) => [1,2,3,4]
 """
+
+
+# Problem 6: Circle Search
+def search_circular_list(nums, target):
+  if not nums:
+    return -1
+
+  left, right = 0, len(nums) - 1
+
+  while left <= right:
+    mid = (left + right) // 2
+    if target == nums[mid]:
+      return mid
+    elif nums[left] <= nums[mid]:
+      if (nums[left] <= target) and (target < nums[mid]):
+        right = mid - 1
+      else:
+        left = mid + 1
+    elif nums[mid + 1] <= nums[right]:
+      if (nums[mid] < target) and (target <= nums[right]):
+        left = mid + 1
+      else:
+        right = mid - 1
+
+  return -1
+
+
+# print(search_circular_list([9,12,2,4,7], 4))
+'''
+Happy Case:
+f([9,12,2,4,7], 4) => 3
+
+Edge Cases:
+f([], 3) => -1
+f([12,17,3,5,9], 4) => -1
+f([6, 6, 8, 9, 13, 2, 5], 6) => 6
+
+Plan:
+- Brute force and traverse the entire list till the target is 
+found, while keeping a count to return as index. 
+(would defeat the time limitation of O(log(n)))
+- Implementing a modified binary search
+
+Detailed Plan (BS):
+- check is the list is empty
+- initialize two pointers left, right, set to 0, and len(lst) - 1
+- initialize a first_element and last_element vars
+- while left and right haven't met traverse the list
+    calculate the mid with left + right // 2
+    if the target is at mid return mid
+    if the target is less than the value at mid:
+      if first element <= value at mid:
+        update first_element with mid + 1
+        and left with mid + 1
+      else
+        right = mid - 1
+        last_element = right
+    if the target is more than the value at mid:
+      if last_element >= value at mid:
+        update last_element with mid - 1
+        and right with mid - 1
+      else
+        left = mid + 1
+        first_element = mid + 1
+- if the loop ends return -1 
+      
+'''
