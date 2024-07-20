@@ -99,26 +99,28 @@ Detailed Plan:
 
 # Problem 4: Count Rotations
 
+
 def count_rotations(nums):
   if len(nums) < 2:
-      return 0
+    return 0
 
   left, right = 0, len(nums) - 1
   first_element = nums[0]
 
   if nums[left] < nums[right]:
-      return 0
+    return 0
 
   while left < right:
-      mid = (left + right) // 2
-      if nums[mid] >= first_element:
-          left = mid + 1
-      else:
-          right = mid
+    mid = (left + right) // 2
+    if nums[mid] >= first_element:
+      left = mid + 1
+    else:
+      right = mid
 
   return left
 
-print(count_rotations([9,12,13,2]))
+
+# print(count_rotations([9,12,13,2]))
 '''
 Happy Case:
 count_rotatioins([10,12,3,4,7]) => 2
@@ -137,3 +139,48 @@ Detailed Plan:
 -initialize left and right pointers,
 -loops 
 '''
+
+# Problem 5: Merge Sort I
+
+def merge(left, right):
+  result = []
+  i = j = 0
+
+  while i < len(left) and j < len(right):
+    if left[i] <= right[j]:
+      result.append(left[i])
+      i += 1
+    else:
+      result.append(right[j])
+      j += 1
+
+  while i < len(left):
+    result.append(left[i])
+    i += 1
+
+  while j < len(right):
+    result.append(right[j])
+    j += 1
+
+  return result
+
+def merge_sort(lst):
+  if not lst:
+    return []
+  if len(lst) == 1:
+    return lst
+
+  mid = (len(lst) - 1) // 2
+
+  return merge(merge_sort(lst[:mid + 1]), merge_sort(lst[mid + 1:]))
+
+print(merge_sort([5, 3, 4, 2, 1]))
+"""
+Happy Case:
+merge_sort([2,4,1,3]) => [1,2,3,4]
+
+Edge Case: 
+merge_sort([]) => []
+merge_sort([1,1,1,1]) => [1,1,1,1]
+merge_sort([1,2,3,4]) => [1,2,3,4]
+"""
