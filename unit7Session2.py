@@ -1,5 +1,6 @@
 # Problem 1: Neatly Nested
 
+
 def is_nested(paren_s: str) -> bool:
   if paren_s == "":
     return True
@@ -7,6 +8,7 @@ def is_nested(paren_s: str) -> bool:
     return False
 
   return is_nested(paren_s[1:len(paren_s) - 1])
+
 
 # print(is_nested(""))
 '''
@@ -20,6 +22,7 @@ is_nested("((())") => False
 '''
 
 # Problem 2: How Many 1s
+
 
 def count_ones(lst: list[int]) -> int:
   count = 0
@@ -38,6 +41,7 @@ def count_ones(lst: list[int]) -> int:
 
   return count
 
+
 # print(count_ones([0,0,0,0,1,1,1]))
 '''
 Happy Case:
@@ -49,6 +53,7 @@ count_ones([]) => 0
 count_ones([0,0,2,5,13,16,21]) => 0
 count_ones([1,1,1,1]) => 4
 '''
+
 
 # Problem 3: Binary Search IV
 def binary_search_helper(nums, target, left, right):
@@ -62,14 +67,15 @@ def binary_search_helper(nums, target, left, right):
   else:
     return binary_search_helper(nums, target, mid + 1, right)
 
+
 def binary_search(nums, target):
   if not nums:
     return -1
   left, right = 0, len(nums) - 1
   return binary_search_helper(nums, target, left, right)
 
-print(binary_search([1,1,1,3,4], 1))
 
+# print(binary_search([1, 1, 1, 3, 4], 1))
 '''
 Happy Case:
 binary_search([1,2,3,4], 2) => 1
@@ -89,4 +95,45 @@ Detailed Plan:
 -pass them to the helper method with the list and the target 
 - the main base case would be if the left and right pointers haven't met yet
 - if they haven't i would recall the function with left or right updated 
+'''
+
+# Problem 4: Count Rotations
+
+def count_rotations(nums):
+  if len(nums) < 2:
+      return 0
+
+  left, right = 0, len(nums) - 1
+  first_element = nums[0]
+
+  if nums[left] < nums[right]:
+      return 0
+
+  while left < right:
+      mid = (left + right) // 2
+      if nums[mid] >= first_element:
+          left = mid + 1
+      else:
+          right = mid
+
+  return left
+
+print(count_rotations([9,12,13,2]))
+'''
+Happy Case:
+count_rotatioins([10,12,3,4,7]) => 2
+
+Edge Case:
+count_rotations([]) => 0
+count_rotations([1,2,3,4]) => 0
+count_rotations([9,12,13,2]) => 3
+count_rotations([1]) => 0
+Plan:
+1. Go through the entire list a find the index of the smallest element.
+2. Use a variant of binary search, comparing the first element with the mid element
+
+Detailed Plan:
+-check if the list is empty, if it is return 0
+-initialize left and right pointers,
+-loops 
 '''
