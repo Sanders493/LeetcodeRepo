@@ -43,3 +43,17 @@ time: O(log n)
 space: O(1)
 '''
 
+def singleNonDuplicate():
+  pass
+
+'''
+Happy Case:
+f([1, 1, 2, 2, 3, 4, 4, 5, 5]) => 3
+
+Edge Case:
+f([1, 2, 2]) => 1
+f([2, 2, 3, 3, 4]) => 3
+
+Plan (BS):
+-
+'''
