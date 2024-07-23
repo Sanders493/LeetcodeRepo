@@ -1,4 +1,4 @@
-entrypoint = "LCBinarySearch.py"
+entrypoint = "LeetCode/LCBinarySearch.py"
 modules = ["python-3.10"]
 
 [nix]

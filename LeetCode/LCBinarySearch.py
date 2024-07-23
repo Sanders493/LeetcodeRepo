@@ -43,17 +43,52 @@ time: O(log n)
 space: O(1)
 '''
 
-def singleNonDuplicate():
-  pass
+def singleNonDuplicate(nums: list[int]) -> int:
+  if len(nums) == 1:
+    return nums[0]
 
+  mid = len(nums) // 2
+
+  if nums[mid] == nums[mid - 1]:
+    if len(nums[mid + 1:]) % 2 == 0:
+      return singleNonDuplicate(nums[:mid - 1])
+    else:
+      return singleNonDuplicate(nums[mid + 1:])
+  elif nums[mid] == nums[mid + 1]:
+    if len(nums[:mid]) % 2 == 0:
+      return singleNonDuplicate(nums[mid + 2:])
+    else:
+      return singleNonDuplicate(nums[:mid])
+  else:
+    return nums[mid]
+
+print(singleNonDuplicate([2, 2, 3, 3, 4]))
 '''
 Happy Case:
-f([1, 1, 2, 2, 3, 4, 4, 5, 5]) => 3
+f([1, 1, 2, 3, 3, 4, 4, 5, 5]) => 2
 
 Edge Case:
 f([1, 2, 2]) => 1
 f([2, 2, 3, 3, 4]) => 3
+f([2]) => 2
 
 Plan (BS):
--
+- if len(lst) == 1
+    return lst[0]
+- calculate the mid with (len(lst) // 2)
+- if lst[mid] == lst[mid - 1]:
+    if len(lst[mid + 1:]) % 2 == 0:
+      return function recalled with lst[:mid - 1]
+    else 
+      return function recalled with lst[mid + 1:]
+- elif lst[mid] == lst[mid + 1]
+    if len(lst[:mid]) % 2 == 0:
+      return function recalled with lst[mid + 2:]
+    else
+      return function recalled with lst[:mid]
+- else
+    return lst[mid]
+Review:
+time: O(log n)
+space: O(log n)
 '''
