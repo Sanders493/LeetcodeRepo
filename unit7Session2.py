@@ -19,6 +19,7 @@ is_nested("()()()") => False
 is_nested("((())") => False
 '''
 
+
 # Problem 2: How Many 1s
 def count_ones(lst: list[int]) -> int:
   count = 0
@@ -92,6 +93,7 @@ Detailed Plan:
 - the main base case would be if the left and right pointers haven't met yet
 - if they haven't i would recall the function with left or right updated 
 '''
+
 
 # Problem 4: Count Rotations
 def count_rotations(nums):
@@ -250,10 +252,11 @@ Detailed Plan (BS):
 
 ## Version 2
 
+
 # Problem 1: Substring Search
 def count_substring(s: str, sub: str) -> int:
   sub_length: int = len(sub)
-  
+
   if len(s) < sub_length:
     return 0
 
@@ -262,7 +265,8 @@ def count_substring(s: str, sub: str) -> int:
   else:
     return count_substring(s[1:], sub)
 
-print(count_substring("ab aca ba","ab"))
+
+# print(count_substring("ab aca ba", "ab"))
 '''
 Happy Case:
 count_substring("abceabcfgba","ab") => 2
@@ -281,4 +285,47 @@ Detail Plan:
   else recall the function with the sliccing of the string from [1:]
 '''
 
-# Problem 2How Many 0s (Iterative) 
+
+# Problem 2How Many 0s (Iterative)
+def count_zeroes(lst: list[int]) -> int:
+  if not lst or lst[0] == 1:
+    return 0
+
+  left, right = 0, len(lst) - 1
+
+  while left <= right:
+    mid = (left + right) // 2
+    if lst[mid] == 0:
+      left = mid + 1
+    else:
+      right = mid - 1
+
+  return left
+
+
+# print(count_zeroes([0, 0, 0]))
+'''
+Happy Case:
+count_zeroes([0, 0, 0, 1, 1]) => 3
+
+Edge Case: 
+count_zeroes([]) => 0
+count_zeroes([1, 1, 1]) => 0
+count_zeroes([0, 0, 0]) => 3
+
+Plan: 
+- if the list is empty or the first element is 1 return 0
+- setup the left and right pointers, to 0 and len(lst) - 1
+- loop while left <= right
+  calculate the mid with left + right // 2
+  if lst[mid] == 0:
+    left = mid + 1
+  else:
+    right = mid - 1
+
+- return left
+
+Review:
+Time: O(log n)
+Space: O(log n)
+'''
