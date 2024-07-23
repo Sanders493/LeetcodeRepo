@@ -327,5 +327,46 @@ Plan:
 
 Review:
 Time: O(log n)
+Space: O(1)
+'''
+
+
+# Problem 3 How Many 0s (Recursive)
+def count_zero_helper(lst: list[int], left: int, right: int) -> int:
+  if left > right:
+    return left
+
+  mid = (left + right) // 2
+  if lst[mid] == 0:
+    return count_zero_helper(lst, mid + 1, right)
+  else:
+    return count_zero_helper(lst, left, mid - 1)
+
+
+def count_zeroes_recursive(lst: list[int]) -> int:
+  if not lst or lst[0] == 1:
+    return 0
+  left, right = 0, len(lst) - 1
+
+  return count_zero_helper(lst, left, right)
+
+print(count_zeroes_recursive([0, 0, 0]))
+
+'''
+Happy Case:
+count_zeroes([0, 0, 0, 1, 1]) => 3
+
+Edge Case: 
+count_zeroes([]) => 0
+count_zeroes([1, 1, 1]) => 0
+count_zeroes([0, 0, 0]) => 3
+
+Plan: 
+- same as iterative version
+
+Review:
+Time: O(log n)
 Space: O(log n)
 '''
+
+# 
