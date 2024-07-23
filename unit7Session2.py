@@ -249,3 +249,36 @@ Detailed Plan (BS):
 '''
 
 ## Version 2
+
+# Problem 1: Substring Search
+def count_substring(s: str, sub: str) -> int:
+  sub_length: int = len(sub)
+  
+  if len(s) < sub_length:
+    return 0
+
+  if s[:sub_length] == sub:
+    return 1 + count_substring(s[sub_length:], sub)
+  else:
+    return count_substring(s[1:], sub)
+
+print(count_substring("ab aca ba","ab"))
+'''
+Happy Case:
+count_substring("abceabcfgba","ab") => 2
+
+Edge Cases:
+count_substring("","ab") => 0
+count_substring("egbad","ab") => 0
+count_substring("a b aca ba","ab") => 0
+
+Detail Plan:
+- The main base case will be if there string is empty return 0
+- The check if the string given is smaller than the sub string
+  if it is return 0
+- The check is the first nth (n being the length of the sub string ) characters are equal to the sub string
+  if they are return 1 + the function recalled with the slicing of the string s from [n:]
+  else recall the function with the sliccing of the string from [1:]
+'''
+
+# Problem 2How Many 0s (Iterative) 
