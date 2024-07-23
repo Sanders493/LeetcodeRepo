@@ -350,7 +350,7 @@ def count_zeroes_recursive(lst: list[int]) -> int:
 
   return count_zero_helper(lst, left, right)
 
-print(count_zeroes_recursive([0, 0, 0]))
+# print(count_zeroes_recursive([0, 0, 0]))
 
 '''
 Happy Case:
@@ -369,4 +369,78 @@ Time: O(log n)
 Space: O(log n)
 '''
 
-# 
+# Problem 4: Special Numbers
+def is_special(nums):
+  n = len(nums)
+
+  for x in range(n + 1):
+      left, right = 0, n
+      while left < right:
+          mid = (left + right) // 2
+          if nums[mid] >= x:
+              right = mid
+          else:
+              left = mid + 1
+      # low is now the first index where nums[low] >= x
+      # The number of elements >= x is n - low
+      if n - left == x:
+          return x
+  return -1
+  
+# print(is_special([3,5]))
+'''
+Happy Case:
+is_special([3,5]) => 2
+
+Edge Case: 
+is_special([]) => 0
+is_special([0]) => -1
+is_special([1]) => 1
+is_special([1,2,3]) => 2
+is_special([1,2,3,4]) => -1
+
+Review:
+Time: O(n log(n))
+Space: O(1)
+'''
+# Problem 5: Merge Sort II
+def merge_sort_II(lst):
+  # If the length of the list is 0-1, the list is already sorted. 
+  if len(lst) <= 1:
+      return lst
+
+  # Find the middle index of the array
+  mid = len(lst) // 2
+  # Divide the array into two halves
+  left_half = lst[:mid]
+  right_half = lst[mid:]
+
+  # Recursive calls to merge_sort for sorting the left and right halves
+  left_half = merge_sort_II(left_half)
+  right_half = merge_sort_II(right_half)
+
+  # Merge the sorted arrays
+  return merge_II(left_half, right_half)
+
+def merge_II(left, right):
+  lst = []
+  i, j = 0, 0
+
+  while i < len(left) and j < len(right):
+    if left[i] <= right[j]:
+      lst.append(left[i])
+      i += 1
+    else:
+      lst.append(right[j])
+      j += 1
+      
+  while i < len(left):
+    lst.append(left[i])
+    i += 1
+  while j < len(right):
+    lst.append(right[j])
+    j += 1
+    
+  return lst
+  
+print(merge_sort_II([5, 3, 4, 2, 1]))
