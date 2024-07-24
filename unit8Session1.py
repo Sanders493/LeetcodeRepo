@@ -1,6 +1,3 @@
-import re
-
-
 class TreeNode():
    def __init__(self, val, left=None, right=None):
        self.val = val
@@ -8,10 +5,10 @@ class TreeNode():
        self.right = right
 
 # Problem 1: Build A Binary Tree
-node3 = TreeNode(5)
-node2 = TreeNode(10)
-node1 = TreeNode(1)
-root = TreeNode(20)
+node3 = TreeNode(4)
+node2 = TreeNode(3)
+node1 = TreeNode(2)
+root = TreeNode(1)
 root.right = node1
 root.left = node2
 node1.right = node3
@@ -65,7 +62,39 @@ def postorder_traversal(root: TreeNode) -> object | None:
    helper(root, elements)
    return elements
 
-print(postorder_traversal(root))
+# print(postorder_traversal(root))
 
 # Problem 7: Binary Tree Product
+def tree_product(root: TreeNode) -> int:
+   if not root:
+      return 1
 
+   def helper(root) -> int:
+      if not root: 
+         return 1
+
+      left = helper(root.left)
+      right = helper(root.right)
+      return root.val * left * right
+         
+   return helper(root)
+
+# node3 = TreeNode(4)
+# node2 = TreeNode(3)
+# node1 = TreeNode(2)
+# root = TreeNode(1)
+# root.right = node1
+# root.left = node2
+# node1.right = node3
+# print(tree_product(root))
+
+# Problem 8: Binary Tree Is Leaf
+def is_leaf(root: TreeNode | None, value: object) -> bool:
+   if not root:
+      return False
+      
+   if root.val == value:
+      return root.left is None and root.right is None
+
+   return is_leaf(root.left, value) or is_leaf(root.right, value)
+# print(is_leaf(root, 3))
