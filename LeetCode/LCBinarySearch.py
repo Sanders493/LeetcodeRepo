@@ -62,7 +62,7 @@ def singleNonDuplicate(nums: list[int]) -> int:
   else:
     return nums[mid]
 
-print(singleNonDuplicate([2, 2, 3, 3, 4]))
+# print(singleNonDuplicate([2, 2, 3, 3, 4]))
 '''
 Happy Case:
 f([1, 1, 2, 3, 3, 4, 4, 5, 5]) => 2
