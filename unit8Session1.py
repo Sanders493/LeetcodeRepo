@@ -79,13 +79,6 @@ def tree_product(root: TreeNode) -> int:
          
    return helper(root)
 
-# node3 = TreeNode(4)
-# node2 = TreeNode(3)
-# node1 = TreeNode(2)
-# root = TreeNode(1)
-# root.right = node1
-# root.left = node2
-# node1.right = node3
 # print(tree_product(root))
 
 # Problem 8: Binary Tree Is Leaf
@@ -98,3 +91,19 @@ def is_leaf(root: TreeNode | None, value: object) -> bool:
 
    return is_leaf(root.left, value) or is_leaf(root.right, value)
 # print(is_leaf(root, 3))
+
+# Problem 9: Binary Search Tree Is Leaf
+def is_leaf_bst(root: TreeNode | None, target: object) -> bool:
+   if not root:
+      return False
+
+   print(root.val)
+   if root.val == target:
+      return (root.left is None) and (root.right is None)
+   elif target < root.val:
+      return is_leaf_bst(root.left, target)
+   else:
+      return is_leaf_bst(root.right, target)
+      
+
+print(is_leaf_bst(node1, 6))
