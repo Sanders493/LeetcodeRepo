@@ -129,7 +129,9 @@ nod1.right = TreeNode(5)
 nod1.left = TreeNode(2)
 nod1.left.left = TreeNode(1)
 nod1.left.right = TreeNode(3)
+
 # print(is_leaf_bst(nod1, 3))
+
 
 # Problem 10: BST Is Full
 def is_full_tree(root: TreeNode | None):
@@ -152,6 +154,5 @@ def is_full_tree(root: TreeNode | None):
    else:
       return True
 
-# print(is_full_tree(nod1))
 
-# Bonus: Print binary tree
+# print(is_full_tree(nod1))
