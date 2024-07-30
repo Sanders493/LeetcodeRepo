@@ -1,4 +1,7 @@
 # Problem 1: Neatly Nested
+from typing_extensions import reveal_type
+
+
 def is_nested(paren_s: str) -> bool:
   if paren_s == "":
     return True
@@ -443,4 +446,56 @@ def merge_II(left, right):
     
   return lst
   
-print(merge_sort_II([5, 3, 4, 2, 1]))
+# print(merge_sort_II([5, 3, 4, 2, 1]))
+
+# Version 3
+# Problem 1: Remove Char
+def remove_char(s: str, char: str) -> str:
+  if s == "":
+    return ""
+  if s[0] == char:
+    return remove_char(s[1:], char)
+  return s[0] + remove_char(s[1:], char)
+
+# print(remove_char("apbplbe", "b"))
+
+'''
+Happy Case:
+remove_char("apbplbe", "b") => "apple"
+
+Edge Cases:
+remove_char("", "b") => ""
+remove_char("mango", "g") => "mango"
+remove_char("mmmmm", "m") => ""
+
+Plans:
+1. Using the length to know
+'''
+
+# Problem 2: Where Does it Go (Iterative)
+def binary_search_recursive(nums, target, left, right, find_insert = False):
+  if left > right and find_insert:
+    return left
+  if left > right and not find_insert:
+    return -1
+    
+  mid = left + (right - left) // 2
+  if nums[mid] == target:
+    return mid
+  elif nums[mid] > target:
+    return binary_search_recursive(nums, target, left, mid - 1, True)
+  else:
+    return binary_search_recursive(nums, target, mid + 1, right, True)
+
+def search_insert_recursive(nums, target):
+  left, right = 0, len(nums) - 1
+
+  index = binary_search_recursive(nums, target, left, right)
+
+  if index != -1:
+    return index
+    
+  return binary_search_recursive(nums, target, left, right, find_insert=True)
+
+print(search_insert_recursive([1, 3, 5, 7, 9, 11, 13, 15], 10))
+  

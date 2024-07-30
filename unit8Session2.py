@@ -1,3 +1,6 @@
+from collections.abc import Mapping
+
+
 class TreeNode():
 
    def __init__(self, value, left=None, right=None):
@@ -153,5 +156,50 @@ node1.left.left = TreeNode(1, "Kakashi")
 node1.left.right = TreeNode(9, "Ino")
 node1.right.left = TreeNode(13, "Madara")
 node1.right.right = TreeNode(17, "Shoji")
-remove_bst(node1, 10)
-print(node1.val)
+# remove_bst(node1, 10)
+# print(node1.val)
+
+# Problem 5: BST In-order Successor
+def inorder_successor(root: TreeNode | None, current: TreeNode):
+   if not root:
+      return None
+   node: TreeNode | None = root
+   prev: TreeNode | None = None
+   while node:
+      if node.key > current.key:
+         if not node.left:
+            print(f"Node with key {current.key} not found")
+            return None
+         prev = node
+         node = node.left
+      elif node.key < current.key:
+         if not node.right: 
+            print(f"Node with key {current.key} not found")
+            return None
+         prev = node
+         node = node.right
+      else:
+         if not node.right:
+            if prev:
+               if prev.key < root.key and prev.key > node.key:
+                  return prev
+               elif node.key < root.key:
+                  return root
+            else:
+               return None
+         return find_smallest(node.right)
+
+def find_smallest(node: TreeNode) -> TreeNode:
+   min_node = node
+
+   def helper(node: TreeNode | None) -> None:
+      nonlocal min_node
+      if node:
+         if node.key < min_node.key:
+            min_node = node
+         helper(node.left)
+         helper(node.right)
+
+   helper(node)
+   return min_node
+print(inorder_successor(node1, node1.right).val)
