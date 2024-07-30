@@ -156,3 +156,39 @@ def is_full_tree(root: TreeNode | None):
 
 
 # print(is_full_tree(nod1))
+
+## Version 3
+
+# Problem 1: Build A Binary Tree III
+node2 = TreeNode("a")
+node2.left = TreeNode("b")
+node2.right = TreeNode("c")
+node2.right.right = TreeNode("d")
+
+# Problem 2: 3-Node Booleans
+def tree_expression(root: TreeNode) -> bool:
+   if not root.left or not root.right:
+      return False
+      
+   if root.val.lower == "and":
+      return root.left.val and root.right.val
+   elif root.val.lower == "or":
+      return root.left.val or root.right.val
+   else:
+      return False
+
+
+
+   
+
+# Problem 3: 3-Node Equality
+def equality(root: TreeNode) -> bool:
+   if not root:
+      return False
+   if root.left and root.right:
+      return root.left.val == root.right.val
+   return False
+node3 = TreeNode(1)
+node3.left = TreeNode(2)
+node3.right = TreeNode(2)
+print(equality(node3))

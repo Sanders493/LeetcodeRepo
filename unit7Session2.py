@@ -498,4 +498,5 @@ def search_insert_recursive(nums, target):
   return binary_search_recursive(nums, target, left, right, find_insert=True)
 
 print(search_insert_recursive([1, 3, 5, 7, 9, 11, 13, 15], 10))
-  
+
+# 

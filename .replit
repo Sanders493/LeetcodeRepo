@@ -1,4 +1,4 @@
-entrypoint = "unit7Session2.py"
+entrypoint = "unit8Session1.py"
 modules = ["python-3.10"]
 
 [nix]
