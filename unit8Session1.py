@@ -164,6 +164,7 @@ node2 = TreeNode("a")
 node2.left = TreeNode("b")
 node2.right = TreeNode("c")
 node2.right.right = TreeNode("d")
+node2.left.left = TreeNode("g")
 
 # Problem 2: 3-Node Booleans
 def tree_expression(root: TreeNode) -> bool:
@@ -188,7 +189,45 @@ def equality(root: TreeNode) -> bool:
    if root.left and root.right:
       return root.left.val == root.right.val
    return False
-node3 = TreeNode(1)
-node3.left = TreeNode(2)
-node3.right = TreeNode(2)
-print(equality(node3))
+# node3 = TreeNode(1)
+# node3.left = TreeNode(2)
+# node3.right = TreeNode(2)
+# print(equality(node3))
+
+# Problem 4: Find Leftmost Path I
+def left_path(root: TreeNode) -> list[object]:
+   if not root:
+      return []
+      
+   elements: list[object] = []
+
+   def helper(node: TreeNode | None, lst: list[object]) -> None:
+      if node:
+         lst.append(node.val)
+         helper(node.left, lst)
+   helper(root, elements)
+   return elements
+# print(left_path(node2))
+
+# Problem 5: Find Leftmost Path II
+def left_path_II(root: TreeNode) -> list[object]:
+   if not root:
+      return []
+
+   elements: list[object] = []
+   current: TreeNode | None = root
+
+   while current:
+      elements.append(current.val)
+      current = current.left
+
+   return elements
+# print(left_path_II(node2))
+
+# Problem 6: Pre-order Traversal
+def preorder_traversal(root):
+   if not root:
+      return []
+   return [root.val] + preorder_traversal(root.left) + preorder_traversal(root.right)
+
+# print(preorder_traversal(node2))
