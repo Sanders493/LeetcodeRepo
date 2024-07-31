@@ -166,11 +166,12 @@ node2.right = TreeNode("c")
 node2.right.right = TreeNode("d")
 node2.left.left = TreeNode("g")
 
+
 # Problem 2: 3-Node Booleans
 def tree_expression(root: TreeNode) -> bool:
    if not root.left or not root.right:
       return False
-      
+
    if root.val.lower == "and":
       return root.left.val and root.right.val
    elif root.val.lower == "or":
@@ -179,9 +180,6 @@ def tree_expression(root: TreeNode) -> bool:
       return False
 
 
-
-   
-
 # Problem 3: 3-Node Equality
 def equality(root: TreeNode) -> bool:
    if not root:
@@ -189,25 +187,32 @@ def equality(root: TreeNode) -> bool:
    if root.left and root.right:
       return root.left.val == root.right.val
    return False
+
+
 # node3 = TreeNode(1)
 # node3.left = TreeNode(2)
 # node3.right = TreeNode(2)
 # print(equality(node3))
 
+
 # Problem 4: Find Leftmost Path I
 def left_path(root: TreeNode) -> list[object]:
    if not root:
       return []
-      
+
    elements: list[object] = []
 
    def helper(node: TreeNode | None, lst: list[object]) -> None:
       if node:
          lst.append(node.val)
          helper(node.left, lst)
+
    helper(root, elements)
    return elements
+
+
 # print(left_path(node2))
+
 
 # Problem 5: Find Leftmost Path II
 def left_path_II(root: TreeNode) -> list[object]:
@@ -222,20 +227,27 @@ def left_path_II(root: TreeNode) -> list[object]:
       current = current.left
 
    return elements
+
+
 # print(left_path_II(node2))
+
 
 # Problem 6: Pre-order Traversal
 def preorder_traversal(root):
    if not root:
       return []
-   return [root.val] + preorder_traversal(root.left) + preorder_traversal(root.right)
+   return [root.val] + preorder_traversal(root.left) + preorder_traversal(
+       root.right)
+
 
 # print(preorder_traversal(node2))
+
 
 # Problem 7: Binary Tree All Lesser
 def is_lesser(root: TreeNode, value: int) -> bool:
    if not root:
       return False
+
    def helper(node: TreeNode | None, value: int) -> bool:
       if not node:
          return True
@@ -245,12 +257,57 @@ def is_lesser(root: TreeNode, value: int) -> bool:
          return False
 
    return helper(root, value)
-# node3 = TreeNode(4)
-# node3.left = TreeNode(2)
-# node3.right = TreeNode(6)
-# node3.left.left = TreeNode(1)
-# node3.left.right = TreeNode(3)
-# node3.right.left = TreeNode(5)
-# node3.right.right = TreeNode(7)
+
+
+node3 = TreeNode(4)
+node3.left = TreeNode(2)
+node3.right = TreeNode(6)
+node3.left.left = TreeNode(1)
+node3.left.right = TreeNode(3)
+node3.right.left = TreeNode(5)
+node3.right.right = TreeNode(7)
+
 # print(is_lesser(node3, 6))
 
+
+# Problem 8: Binary Tree Any Greater
+def contains_greater(root: TreeNode | None, value: int) -> bool:
+   if not root:
+      return False
+   if root.val > value:
+      return True
+   return contains_greater(root.left, value) or contains_greater(
+       root.right, value)
+
+# print(contains_greater(node3, 6))
+
+# Problem 9: BST Any Greater
+def contains_greater_bst(root: TreeNode | None, value: int) -> bool:
+   if not root: 
+      return False
+      
+   current: TreeNode | None = root
+   while current:
+      if current.val > value:
+         return True
+      else:
+         current = current.right
+   return False
+
+# print(contains_greater_bst(node3, 6))
+
+# Problem 10: BST Leaves Sum to Root
+def sum_leaves(root: TreeNode) -> bool:
+   if not root:
+      return False
+   def sum(node: TreeNode | None) -> int:
+      if not node:
+         return 0
+      return node.val + sum(node.left) + sum(node.right)
+   return root.val == sum(root.left) + sum(root.right)
+
+# node4 = TreeNode(11)
+# node4.left = TreeNode(3)
+# node4.right = TreeNode(6)
+# node4.left.right = TreeNode(2)
+# print(sum_leaves(node4))
