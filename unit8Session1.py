@@ -231,3 +231,26 @@ def preorder_traversal(root):
    return [root.val] + preorder_traversal(root.left) + preorder_traversal(root.right)
 
 # print(preorder_traversal(node2))
+
+# Problem 7: Binary Tree All Lesser
+def is_lesser(root: TreeNode, value: int) -> bool:
+   if not root:
+      return False
+   def helper(node: TreeNode | None, value: int) -> bool:
+      if not node:
+         return True
+      if node.val < value:
+         return helper(node.left, value) and helper(node.right, value)
+      else:
+         return False
+
+   return helper(root, value)
+# node3 = TreeNode(4)
+# node3.left = TreeNode(2)
+# node3.right = TreeNode(6)
+# node3.left.left = TreeNode(1)
+# node3.left.right = TreeNode(3)
+# node3.right.left = TreeNode(5)
+# node3.right.right = TreeNode(7)
+# print(is_lesser(node3, 6))
+
