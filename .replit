@@ -1,4 +1,4 @@
-entrypoint = "unit8Session1.py"
+entrypoint = "LCBinarySearch.py"
 modules = ["python-3.10"]
 
 [nix]
