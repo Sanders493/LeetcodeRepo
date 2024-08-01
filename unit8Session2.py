@@ -1,9 +1,9 @@
-# class TreeNode():
+class TreeNode():
 
-#    def __init__(self, value, left=None, right=None):
-#       self.val = value
-#       self.left = left
-#       self.right = right
+   def __init__(self, value, left=None, right=None):
+      self.val = value
+      self.left = left
+      self.right = right
 
 
 #Problem 1: Is Even-valued
@@ -64,14 +64,13 @@ def tree_max(root: TreeNode | None) -> TreeNode | None:
 
 # print(tree_max(nod1).val)
 
+# class TreeNode():
 
-class TreeNode():
-
-   def __init__(self, key, value, left=None, right=None):
-      self.key = key
-      self.val = value
-      self.left = left
-      self.right = right
+#    def __init__(self, key, value, left=None, right=None):
+#       self.key = key
+#       self.val = value
+#       self.left = left
+#       self.right = right
 
 
 # Problem 3: BST Insert
@@ -142,19 +141,20 @@ def remove_bst(root: TreeNode | None, key: int) -> TreeNode | None:
       root.key = temp_node.key
       root.val = temp_node.val
       root.right = remove_bst(root.right, temp_node.key)
-      
+
    return root
 
 
-node1 = TreeNode(10, "Neiji")
-node1.left = TreeNode(8, "Sasuke")
-node1.right = TreeNode(15, "Itachi")
-node1.left.left = TreeNode(1, "Kakashi")
-node1.left.right = TreeNode(9, "Ino")
-node1.right.left = TreeNode(13, "Madara")
-node1.right.right = TreeNode(17, "Shoji")
+# node1 = TreeNode(10, "Neiji")
+# node1.left = TreeNode(8, "Sasuke")
+# node1.right = TreeNode(15, "Itachi")
+# node1.left.left = TreeNode(1, "Kakashi")
+# node1.left.right = TreeNode(9, "Ino")
+# node1.right.left = TreeNode(13, "Madara")
+# node1.right.right = TreeNode(17, "Shoji")
 # remove_bst(node1, 10)
 # print(node1.val)
+
 
 # Problem 5: BST In-order Successor
 def inorder_successor(root: TreeNode | None, current: TreeNode):
@@ -170,7 +170,7 @@ def inorder_successor(root: TreeNode | None, current: TreeNode):
          prev = node
          node = node.left
       elif node.key < current.key:
-         if not node.right: 
+         if not node.right:
             print(f"Node with key {current.key} not found")
             return None
          prev = node
@@ -186,6 +186,7 @@ def inorder_successor(root: TreeNode | None, current: TreeNode):
                return None
          return find_smallest(node.right)
 
+
 def find_smallest(node: TreeNode) -> TreeNode:
    min_node = node
 
@@ -199,4 +200,46 @@ def find_smallest(node: TreeNode) -> TreeNode:
 
    helper(node)
    return min_node
-print(inorder_successor(node1, node1.right).val)
+
+# print(inorder_successor(node1, node1.right).val)
+
+## Version 3
+
+# Problem 1: Is Odd-valued
+def count_odds(root: TreeNode | None) -> int:
+   if not root:
+      return 0
+   if root.val % 2 != 0:
+      return 1 + count_odds(root.left) + count_odds(root.right)
+   else:
+      return 0 + count_odds(root.left) + count_odds(root.right)
+
+
+# node1 = TreeNode(1)
+# node1.left = TreeNode(3)
+# node1.right = TreeNode(2)
+# node1.left.left = TreeNode(8)
+# node1.right.right = TreeNode(13)
+# print(count_odds(node1))
+
+# Problem 2: Binary Tree Min
+def tree_min(root: TreeNode | None) -> TreeNode | None:
+   if not root: 
+      return None
+   min_node: TreeNode = TreeNode(float("inf"))
+   def helper(node: TreeNode | None) -> None:
+      nonlocal min_node
+      if node:
+         if node.val < min_node.val:
+            min_node = node
+         helper(node.left)
+         helper(node.right)
+   helper(root)
+   return min_node
+# node1 = TreeNode(15)
+# node1.left = TreeNode(3)
+# node1.right = TreeNode(2)
+# node1.left.left = TreeNode(8)
+# node1.right.right = TreeNode(13)
+# print(tree_min(node1).val)
+
