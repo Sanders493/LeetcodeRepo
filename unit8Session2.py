@@ -1,12 +1,9 @@
-from collections.abc import Mapping
+# class TreeNode():
 
-
-class TreeNode():
-
-   def __init__(self, value, left=None, right=None):
-      self.val = value
-      self.left = left
-      self.right = right
+#    def __init__(self, value, left=None, right=None):
+#       self.val = value
+#       self.left = left
+#       self.right = right
 
 
 #Problem 1: Is Even-valued
