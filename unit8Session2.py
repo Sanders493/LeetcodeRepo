@@ -243,3 +243,36 @@ def tree_min(root: TreeNode | None) -> TreeNode | None:
 # node1.right.right = TreeNode(13)
 # print(tree_min(node1).val)
 
+# Problem 3: BST Insert III
+def insert_with_duplicates(root, value) -> TreeNode:
+   if not root:
+      return TreeNode(value) 
+
+   current: TreeNode | None = root
+
+   while current:
+      if current.val == value:
+         if not current.left:
+            current.left = TreeNode(value)
+            break
+         current.left = insert_with_duplicates(current.left, value)
+         break
+      elif current.val > value:
+         if not current.left:
+            current.left = TreeNode(value)
+            break
+         current = current.left
+      else:
+         if not current.right:
+            current.right = TreeNode(value)
+            break
+         current = current.right
+   return root
+# node2 = TreeNode(10)
+# node2.left = TreeNode(8)
+# node2.right = TreeNode(15)
+# node2.left.left = TreeNode(1)
+# node2.left.right = TreeNode(6)
+
+# insert_with_duplicates(node2, 10)
+# print(node2.left.right.right.val)
