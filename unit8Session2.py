@@ -201,9 +201,11 @@ def find_smallest(node: TreeNode) -> TreeNode:
    helper(node)
    return min_node
 
+
 # print(inorder_successor(node1, node1.right).val)
 
 ## Version 3
+
 
 # Problem 1: Is Odd-valued
 def count_odds(root: TreeNode | None) -> int:
@@ -222,11 +224,13 @@ def count_odds(root: TreeNode | None) -> int:
 # node1.right.right = TreeNode(13)
 # print(count_odds(node1))
 
+
 # Problem 2: Binary Tree Min
 def tree_min(root: TreeNode | None) -> TreeNode | None:
-   if not root: 
+   if not root:
       return None
    min_node: TreeNode = TreeNode(float("inf"))
+
    def helper(node: TreeNode | None) -> None:
       nonlocal min_node
       if node:
@@ -234,8 +238,11 @@ def tree_min(root: TreeNode | None) -> TreeNode | None:
             min_node = node
          helper(node.left)
          helper(node.right)
+
    helper(root)
    return min_node
+
+
 # node1 = TreeNode(15)
 # node1.left = TreeNode(3)
 # node1.right = TreeNode(2)
@@ -243,10 +250,11 @@ def tree_min(root: TreeNode | None) -> TreeNode | None:
 # node1.right.right = TreeNode(13)
 # print(tree_min(node1).val)
 
+
 # Problem 3: BST Insert III
 def insert_with_duplicates(root, value) -> TreeNode:
    if not root:
-      return TreeNode(value) 
+      return TreeNode(value)
 
    current: TreeNode | None = root
 
@@ -273,6 +281,8 @@ def insert_with_duplicates(root, value) -> TreeNode:
 # node2.right = TreeNode(15)
 # node2.left.left = TreeNode(1)
 # node2.left.right = TreeNode(6)
-
 # insert_with_duplicates(node2, 10)
 # print(node2.left.right.right.val)
+
+# Problem 4: BST Remove III
+
