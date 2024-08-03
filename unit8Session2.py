@@ -276,6 +276,8 @@ def insert_with_duplicates(root, value) -> TreeNode:
             break
          current = current.right
    return root
+
+
 # node2 = TreeNode(10)
 # node2.left = TreeNode(8)
 # node2.right = TreeNode(15)
@@ -284,5 +286,16 @@ def insert_with_duplicates(root, value) -> TreeNode:
 # insert_with_duplicates(node2, 10)
 # print(node2.left.right.right.val)
 
-# Problem 4: BST Remove III
 
+# Problem 4: BST Remove III
+def remove_bst_II(root, key):
+   # Locate the node to be removed
+   # If the node is a leaf node:
+   # Remove the node by redirecting the appropriate child reference of its parent to None
+   # If the node has one parent:
+   # Replace the node with its child, updating its parent's nodes child reference appropriately
+   # If the node has two children:
+   # Find the largest node in the node's left subtree.
+   # Set the root of the node's right subtree as the right child of the largest node in the node's left subtree.
+   # Return the root of the updated tree
+   pass
