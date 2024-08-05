@@ -1,12 +1,9 @@
-from re import sub
+# class TreeNode():
 
-
-class TreeNode():
-
-   def __init__(self, value, left=None, right=None):
-      self.val = value
-      self.left = left
-      self.right = right
+#    def __init__(self, value, left=None, right=None):
+#       self.val = value
+#       self.left = left
+#       self.right = right
 
 
 #Problem 1: Is Even-valued
@@ -165,45 +162,31 @@ def inorder_successor(root: TreeNode | None, current: TreeNode):
    if not root:
       return None
    node: TreeNode | None = root
-   prev: TreeNode | None = None
+   i_successor: TreeNode | None = None
+   key: int = current.key
+   
    while node:
-      if node.key > current.key:
-         if not node.left:
-            print(f"Node with key {current.key} not found")
-            return None
-         prev = node
-         node = node.left
-      elif node.key < current.key:
-         if not node.right:
-            print(f"Node with key {current.key} not found")
-            return None
-         prev = node
+      if node.key <= key:
          node = node.right
       else:
-         if not node.right:
-            if prev:
-               if prev.key < root.key and prev.key > node.key:
-                  return prev
-               elif node.key < root.key:
-                  return root
-            else:
-               return None
-         return find_smallest(node.right)
+         i_successor = node
+         node = node.left
 
+   return i_successor
 
-def find_smallest(node: TreeNode) -> TreeNode:
-   min_node = node
+'''
+       10
+      /  \
+     /    \
+    5      15
+   / \    
+  1   8
+     / \
+    6   9
+'''
+   
 
-   def helper(node: TreeNode | None) -> None:
-      nonlocal min_node
-      if node:
-         if node.key < min_node.key:
-            min_node = node
-         helper(node.left)
-         helper(node.right)
-
-   helper(node)
-   return min_node
+      
 
 
 # print(inorder_successor(node1, node1.right).val)
@@ -334,12 +317,12 @@ def remove_bst_II(root: TreeNode | None, key: int) -> TreeNode | None:
 # print(node1.left.right.val)
 
 
-class TreeNode():
+# class TreeNode():
 
-   def __init__(self, value, left=None, right=None):
-      self.val = value
-      self.left = left
-      self.right = right
+#    def __init__(self, value, left=None, right=None):
+#       self.val = value
+#       self.left = left
+#       self.right = right
 
 
 # Problem 5: BST Find Floor
