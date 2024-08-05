@@ -1,3 +1,6 @@
+from re import sub
+
+
 class TreeNode():
 
    def __init__(self, value, left=None, right=None):
@@ -349,12 +352,13 @@ def find_floor(root: TreeNode | None, value: int) -> TreeNode | None:
 
    while current:
       if current.val > value:
-            current = current.left
+         current = current.left
       else:
-            prev = current
-            current = current.right
+         prev = current
+         current = current.right
    return prev
-   
+
+
 # node1 = TreeNode(10)
 # node1.left = TreeNode(5)
 # node1.right = TreeNode(16)
@@ -397,3 +401,50 @@ Time: O(log n)
 Space: O(1)
 '''
 
+
+# Problem 6: Nested Binary Trees
+def are_equal(root, sub_root) -> bool:
+   if not root and not sub_root:
+      return True
+   if not root or not sub_root:
+      return False
+   if root.val == sub_root.val:
+      return are_equal(root.left, sub_root.left) and are_equal(
+          root.right, sub_root.right)
+   return False
+
+
+def is_subtree(root: TreeNode | None, sub_root: TreeNode | None) -> bool:
+   if not sub_root:
+      if not root:
+         return True
+      return True
+   if not root:
+      return False
+
+   if root.val == sub_root.val:
+      return are_equal(root, sub_root)
+   else:
+      return is_subtree(root.left, sub_root) or is_subtree(
+          root.right, sub_root)
+
+
+# node1 = TreeNode(2)
+# node1.left = TreeNode(3)
+# node1.right = TreeNode(5)
+# node1.left.left = TreeNode(6)
+# node1.left.right = TreeNode(8)
+# node1.right.right = TreeNode(12)
+
+# node2 = TreeNode(3)
+# node2.left = TreeNode(6)
+# node2.right = TreeNode(7)
+# print(is_subtree(node1, node2))
+"""
+      2                3
+     / \              / \
+    /   \            6   7  
+   3     5
+  / \     \
+ 6   7     12
+ """
