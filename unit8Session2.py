@@ -64,13 +64,14 @@ def tree_max(root: TreeNode | None) -> TreeNode | None:
 
 # print(tree_max(nod1).val)
 
-# class TreeNode():
 
-#    def __init__(self, key, value, left=None, right=None):
-#       self.key = key
-#       self.val = value
-#       self.left = left
-#       self.right = right
+class TreeNode():
+
+   def __init__(self, key, value, left=None, right=None):
+      self.key = key
+      self.val = value
+      self.left = left
+      self.right = right
 
 
 # Problem 3: BST Insert
@@ -288,14 +289,111 @@ def insert_with_duplicates(root, value) -> TreeNode:
 
 
 # Problem 4: BST Remove III
-def remove_bst_II(root, key):
-   # Locate the node to be removed
-   # If the node is a leaf node:
-   # Remove the node by redirecting the appropriate child reference of its parent to None
-   # If the node has one parent:
-   # Replace the node with its child, updating its parent's nodes child reference appropriately
-   # If the node has two children:
-   # Find the largest node in the node's left subtree.
-   # Set the root of the node's right subtree as the right child of the largest node in the node's left subtree.
-   # Return the root of the updated tree
-   pass
+def find_largest_child(root: TreeNode) -> TreeNode:
+   while root.right:
+      root = root.right
+   return root
+
+
+def remove_bst_II(root: TreeNode | None, key: int) -> TreeNode | None:
+   if not root:
+      return None
+
+   if root.key == key:
+      if not root.left:
+         return root.right
+      elif not root.right:
+         return root.left
+
+      temp_node: TreeNode = find_largest_child(root.left)
+      temp_node.right = root.right
+      return root.left
+   elif root.key > key:
+      if not root.left:
+         print("key not found")
+      root.left = remove_bst_II(root.left, key)
+   else:
+      if not root.right:
+         print("Key not found")
+      root.right = remove_bst_II(root.right, key)
+
+   return root
+
+
+# node1 = TreeNode(10, "Neiji")
+# node1.left = TreeNode(5, "Sasuke")
+# node1.right = TreeNode(15, "Itachi")
+# node1.left.left = TreeNode(1, "Kakashi")
+# node1.left.right = TreeNode(8, "Ino")
+# node1.right.left = TreeNode(13, "Madara")
+# node1.right.right = TreeNode(17, "Shoji")
+# remove_bst_II(node1, 5)
+# print(node1.left.right.val)
+
+
+class TreeNode():
+
+   def __init__(self, value, left=None, right=None):
+      self.val = value
+      self.left = left
+      self.right = right
+
+
+# Problem 5: BST Find Floor
+def find_floor(root: TreeNode | None, value: int) -> TreeNode | None:
+   if not root:
+      return None
+
+   current: TreeNode | None = root
+   prev: TreeNode | None = None
+
+   while current:
+      if current.val > value:
+            current = current.left
+      else:
+            prev = current
+            current = current.right
+   return prev
+   
+# node1 = TreeNode(10)
+# node1.left = TreeNode(5)
+# node1.right = TreeNode(16)
+# node1.left.right = TreeNode(8)
+# node1.right.left = TreeNode(13)
+# node1.right.right = TreeNode(20)
+# print(find_floor(node1, 15).val)
+'''
+Happy Case:
+f(TreeNode(10, 5(None, 8), 16(13, 20)), 15) -> TreeNode(13)
+
+Edge Cases:
+f(None, 5) -> None
+f(TreeNode(10, 5(None, 8), 16(13, 20)), 11) -> TreeNode(10)
+f(TreeNode(10, 5(None, 8), 16(13, 20)), 2) -> None
+
+Plans:
+- Binary search through the BST using a while loop, while keeping a prev value
+
+Detailed Plan:
+- check if the root is None
+- initialize a current var and set it to the root
+- initialize a prev and set it to None
+- while current is not None loops through the binary tree:
+   if current.val > value:
+      check if current.val has a left (
+      if prev:
+         return prev
+      return None if false)
+      set current to current.left
+   else:
+      check if current has a right (return current is false)
+         set prev to current
+         set current to current.right
+
+- return None
+
+Evalute:
+Time: O(log n)
+Space: O(1)
+'''
+
