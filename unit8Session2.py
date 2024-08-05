@@ -164,7 +164,7 @@ def inorder_successor(root: TreeNode | None, current: TreeNode):
    node: TreeNode | None = root
    i_successor: TreeNode | None = None
    key: int = current.key
-   
+
    while node:
       if node.key <= key:
          node = node.right
@@ -173,6 +173,7 @@ def inorder_successor(root: TreeNode | None, current: TreeNode):
          node = node.left
 
    return i_successor
+
 
 '''
        10
@@ -184,10 +185,6 @@ def inorder_successor(root: TreeNode | None, current: TreeNode):
      / \
     6   9
 '''
-   
-
-      
-
 
 # print(inorder_successor(node1, node1.right).val)
 
@@ -315,7 +312,6 @@ def remove_bst_II(root: TreeNode | None, key: int) -> TreeNode | None:
 # node1.right.right = TreeNode(17, "Shoji")
 # remove_bst_II(node1, 5)
 # print(node1.left.right.val)
-
 
 # class TreeNode():
 
