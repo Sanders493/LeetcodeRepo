@@ -1,6 +1,3 @@
-from typing import no_type_check
-
-
 class TreeNode():
 
    def __init__(self, val, left=None, right=None):

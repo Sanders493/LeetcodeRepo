@@ -1,4 +1,4 @@
-entrypoint = "unit1Session1.py"
+entrypoint = "LinkedList.py"
 modules = ["python-3.10"]
 
 [nix]
